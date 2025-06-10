@@ -389,9 +389,15 @@ void ControllerServer::computeControl()
       }
 
       if (action_server_->is_cancel_requested()) {
-        RCLCPP_INFO(get_logger(), "Goal was canceled. Stopping the robot.");
+        RCLCPP_INFO(get_logger(), "Goal was canceled. Stopping the robot.BySW");
         action_server_->terminate_all();
-        publishZeroVelocity();
+        // publishZeroVelocity();
+        //sw
+        rclcpp::Rate rate(5);
+        for(int i = 0; i < 10; i++){
+          publishZeroVelocity();
+          rate.sleep();
+        }
         return;
       }
 
